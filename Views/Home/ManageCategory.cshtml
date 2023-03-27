@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Category Page";
+}
+
+<div class="container" ng-controller="myCtrl">
+    <h2>Category Table</h2>
+    <div class="form-group">
+        <input type="text" name="name" class="form-control" ng-model="searchCatgeory" placeholder="Search">
+    </div><br /><br />
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Category</button>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Category ID</th>
+                <th>Category</th>
+                <th>products</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="category in CategoryList | filter:searchCatgeory">
+                <td>{{$index+1}}</td>
+                <td>{{category.categoryId}}</td>
+                <td>{{category.category_name}}</td>
+                <td>
+                    <ul>
+                        <li ng-repeat="product in category.products">
+                            {{product.product_name}}
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-md" href=" ">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-md" ng-click="DeleteData(category.categoryId)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+    <form form name="userForm" method="post">
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> Category </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Add Category</label>
+                            <input type="text" name="name" class="form-control" ng-model="save.category_name">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                       <input type="submit" class="btn btn-success" value="Save" ng-click="Savechanges()" />
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+

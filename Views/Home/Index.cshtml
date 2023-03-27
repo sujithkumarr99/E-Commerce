@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container" ng-controller="mainCtrl">
+
+    <h2>Updated Price Detail</h2>
+
+
+
+    <div class="form-group col-md-6">
+        <select class="form-control" ng-model="search">  
+            <option value="">Select Product</option>
+            <option ng-repeat="a in ProductList" value="{{a.product_name}}"> {{a.product_name}}</option>
+        </select><br /><br />
+    </div>
+    <div ng-if="search">
+        <div ng-repeat="product in ProductList | filter: search">
+            <h3>{{product.product_name}}</h3>
+            <ul class="list-unstyled">
+                <li ng-repeat="price in product.productPrice">
+                    Price on {{price.date}} : {{price.price | currency:"₹"}}
+                </li>
+                <li ng-repeat="price in product.productPrice" >
+                    <h3><span ng-show="$last"> Current Price{{price.price | currency:"₹"}}</span></h3>
+                </li>
+            </ul>
+        </div>
+    </div>  
+</div>
+
+
+

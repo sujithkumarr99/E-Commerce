@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Price Page";
+}
+
+<div class="container" ng-controller="priceCtrl">
+    <h2>Price Control</h2>
+ 
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Update Price</button>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Product Id</th>
+                <th>price</th>
+                <th>Date</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="price in priceList">
+                <td>{{$index+1}}</td>
+                <td>{{price.productId}}</td>
+                <td>{{price.price}}</td>
+                <td>{{price.date}}</td>
+             
+                <td>
+                    <a class="btn btn-primary btn-md" href=" ">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-md" ng-click="DeleteData(price.priceId)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- Modal -->
+
+    <form form name="userForm" method="post">
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> Category </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Enter The Amount</label>
+                            <input type="number" name="name" class="form-control" ng-model="save.price">
+                        </div>
+                        <div class="form-group">
+                            <label> Date</label>
+                            <input type="date" name="name" class="form-control" ng-model="save.date">
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" ng-model="save.productId"
+                                    name="DepartmentId" data-val="true" data-val-required="The Department Field is required.">
+                                <option value="">Select</option>
+                                <option ng-repeat="x in myData" value="{{x.productId}}">{{x.product_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success" value="Save" ng-click="Savechanges()" />
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+

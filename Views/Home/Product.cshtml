@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Product";
+}
+
+<div class="container" ng-controller="productCtrl">
+
+    <h2>Product Table</h2>
+
+    <div class="form-group">
+        <input type="text" name="name" class="form-control" ng-model="search" placeholder="Search">
+    </div><br /><br />
+    <button type="button" class="btn btn-info btn-lg bg-primary" data-toggle="modal" data-target="#myModal">Add Products</button>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in CategoryList | filter: search">
+                <td>{{$index+1}}</td>
+                <td>{{product.product_name}}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="price in product.productPrice">
+                            {{price.price}}
+                        </li>
+                    </ul>
+                </td>
+
+                <td>
+                    <a class="btn btn-primary btn-md" href="{{category.id}}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-md" ng-click="DeleteData(product.productId)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <form form name="userForm" action="" method="post">
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> Product </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label> Product Name</label>
+                            <input type="text" name="name" class="form-control" ng-model="save.product_name">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" ng-model="save.categoryId"
+                                    name="DepartmentId" data-val="true" data-val-required="The Department Field is required.">
+                                <option value="">Select</option>
+                                <option ng-repeat="x in myData" value="{{x.categoryId}}">{{x.category_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success" value="Save" ng-click="Savechanges()" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>
